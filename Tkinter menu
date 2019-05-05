@@ -1,0 +1,135 @@
+from tkinter import *
+from tkinter import messagebox
+from tkinter import ttk
+import random
+from random import randint
+
+#No se usó (Sin Completar)
+lista=[]
+
+def samename(lista,nombre,i):
+    if(nombre.get()==""):
+        messagebox.showinfo("Usuario invalido","El nombre de usuario no ha sido definido correctamente")
+        ventanainicio()
+    elif(lista==[]):
+        escribir()
+        leaderboard()
+        messagebox.showinfo("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")  
+    elif(i==len(lista)-1):
+        if(nombre.get()!=lista[i]):
+           escribir()
+           leaderboard()
+           messagebox.showinfo("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")  
+        else:
+            lista.append([])
+            messagebox.showinfo("Welcome","Bienvenido de nuevo")
+    else:            
+        if(nombre.get()!=lista[i]):
+            return samename(lista,nombre,i+1)
+        else:
+            lista.append([])
+            messagebox.showinfo("Welcome","Bienvenido de nuevo")
+            
+def play():
+    samename(lista,nombre,0)
+    nombre.set("")
+    ventanainicio.destroy()
+    base()
+
+    
+def leaderboard():
+    cuadro=Text(ventanainicio,width=40,height=20)
+    cuadro.insert(INSERT,"Usuario \t\t\t Puntuación"+'\n'+'\n')
+    cuadro.insert(INSERT,nombre.get()) 
+    archivo=open("playerlist.txt","r")
+    for linea in archivo.readlines():
+        cuadro.insert(INSERT,linea)
+    cuadro.insert(INSERT,nombre.get())
+    cuadro.place(x=50,y=95)
+    cuadro.config(state=DISABLED)
+    
+    
+def abrirnota():
+    nota=open("playerlist.txt","a")
+    nota.close()
+    
+def cargar():
+    nota=open("playerlist.txt","r")
+    linea=nota.readline()
+    if linea:
+        if (linea[-1]=="\n"):
+            linea=linea[:-1]
+            lista.append(linea)
+            linea=nota.readline()
+        else:
+            linea=linea
+            lista.append(linea)
+            linea=nota.readline()
+    nota.close()
+    
+def escribir():
+    nota=open("playerlist.txt","a")
+    if(nombre!=""):
+        nota.write(nombre.get()+"\n")
+    else:
+        return False
+    nota.close()
+
+
+def base():
+       
+    print("***Bases Numerales***")
+    Bin= "Bin = -Binario-0"
+    print(Bin)
+    
+    print("2 = 2-Base Decimal-4")
+    Oct="Oct = 8-Octal-8"
+    print(Oct)
+    Hex="Hex = 16-Hexadecimal-16"
+    print(Hex)
+    
+    b=int(input('Codigo de la base numeral elegida: '))
+    
+    if(b==Bin):
+        mBin()
+    elif(b==2):
+        matriz()
+    elif(b==Oct):
+        mOct()
+    elif(b==Hex):
+        mHex()
+    else:
+        print("Base invalida")
+            
+    
+#Menu Principal
+
+colorfondo="#00CCCC"
+
+ventanainicio= Tk()
+
+ventanainicio.title("2048+")
+
+ventanainicio.geometry("700x600")
+
+ventanainicio.configure(background=colorfondo)
+
+nombre=StringVar()
+
+abrirnota()
+cargar()
+leaderboard()
+
+etiqueta1=Label(ventanainicio,text="2048 PLUS")
+
+etiqueta1.place(x=325,y=3)
+
+botoninicio=Button(ventanainicio,text="Jugar",command=play).place(x=500,y=300)
+
+etiqueta2=Label(ventanainicio,text="ingrese su nombre de usuario").place(x=500,y=200)
+
+etiqueta3=Label(ventanainicio,text="Leaderboard").place(x=50,y=65)
+
+entrada=Entry(ventanainicio,textvariable=nombre).place(x=500,y=250)
+
+
