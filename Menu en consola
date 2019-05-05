@@ -1,0 +1,85 @@
+lista=[]
+def play(nombre):
+    samename(lista,nombre,0)
+    
+
+def samename(lista,nombre,i):
+    if(nombre==""):
+        
+        print("Usuario invalido","El nombre de usuario no ha sido definido correctamente")
+
+    elif(lista==[]):
+        
+        print("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")
+        escribir(nombre)
+        leaderboard(nombre,0)
+        
+    elif(i==len(lista)-1):
+        if(nombre!=lista[i]):
+            
+           print("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")
+           escribir(nombre)
+           leaderboard()
+
+        else:
+            lista.append([])
+            print("Welcome","Bienvenido de nuevo")
+    else:            
+        if(nombre!=lista[i]):
+            return samename(lista,nombre,i+1)
+        else:
+            lista.append([])
+            print("Welcome","Bienvenido de nuevo")
+            
+    
+def abrirnota():
+    nota=open("playerlist.txt","a")
+    nota.close()
+    
+def cargar():
+    nota=open("playerlist.txt","r")
+    linea=nota.readline()
+    if linea:
+        if (linea[-1]=="\n"):
+            linea=linea[:-1]
+            lista.append(linea)
+            linea=nota.readline()
+        else:
+            linea=linea
+            lista.append(linea)
+            linea=nota.readline()
+    nota.close()
+    
+def escribir(nombre):
+    nota=open("playerlist.txt","a")
+    if(nombre!=""):
+        nota.write(nombre+'\t'+str(pts)+"\n")
+    else:
+        return False
+    nota.close()
+
+def leaderboard(nombre,p):
+    print('\n')
+    print('[Leaderboard]  [Puntuacion]'+'\n')
+    print(nombre+'='+ str(pts))
+    print('\n')
+
+
+
+def baseint():
+       
+    print("***Bases Numerales***")
+    print("2 = 01-Binario-01")    
+    print("10 = 2-Base Decimal-4")
+    print("8 = 8-Octal-8")
+    print("16 = 16-Hexadecimal-16")
+    
+nombre=str(input('Ingrese su usuario:'))
+play(nombre)    
+baseint()  
+b=int(input('Codigo de la base numeral elegida: '))
+matriz()
+direction()
+
+
+
