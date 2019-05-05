@@ -1,0 +1,50 @@
+def direction():
+    tk=Tk()
+    colorfondo="#00CCCC"
+    tk.bind_all('<KeyPress-Left>',teclas)
+    tk.bind_all('<KeyPress-Right>',teclas)
+    tk.bind_all('<KeyPress-Up>',teclas)
+    tk.bind_all('<KeyPress-Down>',teclas)
+    tk.title("2048 teclado")
+    tk.geometry("300x100")
+    tk.configure(background=colorfondo)
+    Bl=Button(tk,text="⬅",width=4,height=2).place(x=20,y=30)
+    Ll=Label(tk,text="Left").place(x=23,y=5)
+    Br=Button(tk,text="➡",width=4,height=2).place(x=90,y=30)
+    Lr=Label(tk,text="Right").place(x=93,y=5)
+    Bu=Button(tk,text="⬆",width=4,height=2).place(x=160,y=30)
+    Lu=Label(tk,text="Up").place(x=166,y=5)
+    Bd=Button(tk,text="⬇",width=4,height=2).place(x=230,y=30)
+    Ld=Label(tk,text="Down").place(x=233,y=5)
+    tk.focus()
+
+        
+def teclas(event):
+
+    if (event.keysym=='Left'):
+        print('\n')
+        mDec(0,0,m1)
+        win(0,0,m1)
+        izquierda(0,3,m1)
+
+    elif(event.keysym=='Right'):
+        print('\n')
+        mDec(0,0,m1)
+        win(0,0,m1)
+        derecha(0,0,m1)
+            
+    elif(event.keysym=='Up'):
+        print('\n')
+        mDec(0,0,m1)
+        win(0,0,m1)
+        up(3,0,m1)
+            
+    elif(event.keysym=='Down'):
+        print('\n')
+        mDec(0,0,m1)
+        win(0,0,m1)
+        down(0,0,m1)
+            
+    else:
+        return direction()
+
