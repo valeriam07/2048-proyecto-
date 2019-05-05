@@ -1,0 +1,105 @@
+def play(nombre):
+    samename(lista,nombre,0)
+    base()
+
+def samename(lista,nombre,i):
+    if(nombre==""):
+        print("Usuario invalido","El nombre de usuario no ha sido definido correctamente")
+
+    elif(lista==[]): 
+        escribir(nombre)
+        leaderboard(nombre,0)
+        print("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")
+        
+    elif(i==len(lista)-1):
+        if(nombre!=lista[i]):
+           escribir(nombre)
+           leaderboard()
+           print("Welcome","Su usario ha sido registrado con exito ¡Bienvenido al juego!")
+           
+        else:
+            lista.append([])
+            print("Welcome","Bienvenido de nuevo")
+    else:            
+        if(nombre!=lista[i]):
+            return samename(lista,nombre,i+1)
+        else:
+            lista.append([])
+            print("Welcome","Bienvenido de nuevo")
+            
+    
+def abrirnota():
+    nota=open("playerlist.txt","a")
+    nota.close()
+    
+def cargar():
+    nota=open("playerlist.txt","r")
+    linea=nota.readline()
+    if linea:
+        if (linea[-1]=="\n"):
+            linea=linea[:-1]
+            lista.append(linea)
+            linea=nota.readline()
+        else:
+            linea=linea
+            lista.append(linea)
+            linea=nota.readline()
+    nota.close()
+    
+def escribir(nombre):
+    nota=open("playerlist.txt","a")
+    if(nombre!=""):
+        nota.write(nombre+"\n")
+    else:
+        return False
+    nota.close()
+
+def leaderboard(nombre,p):
+    print('\n')
+    print('[Leaderboard]  [Puntuacion]'+'\n')
+    print(nombre+'='+ str(puntuacion(p)))
+
+def puntos(pts):
+    pts=pts+100
+    print(pts)
+    return pts
+
+def puntuacion(p):
+    if(p==0):
+        return 0000
+    elif(p==1):
+        puntos()
+    else:
+        ""
+def base():
+       
+    print("***Bases Numerales***")
+    Bin= "Bin = -Binario-0"
+    print(Bin)
+    
+    print("2 = 2-Base Decimal-4")
+    Oct="Oct = 8-Octal-8"
+    print(Oct)
+    Hex="Hex = 16-Hexadecimal-16"
+    print(Hex)
+    
+    b=int(input('Codigo de la base numeral elegida: '))
+    
+    if(b==Bin):
+        mBin()
+    elif(b==2):
+        matriz()
+    elif(b==Oct):
+        mOct()
+    elif(b==Hex):
+        mHex()
+    else:
+        print("Base invalida")        
+        
+    
+
+def Menu():
+    nombre=str(input('Ingrese su usuario:'))
+    play(nombre)
+Menu()
+
